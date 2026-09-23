@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>计量器具检定与校准管理台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="toolbar">
+  <div class="toolbar-left">
+    <span class="brand">计量器具检定与校准管理台</span>
+    <span class="toolbar-sep">/</span>
+    <span class="toolbar-date" id="toolbarDate">今日日期加载中</span>
+  </div>
+  <div class="toolbar-right">
+    <button type="button" class="btn btn-ghost" id="btnSettings">设置</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button type="button" class="tab is-active" data-tab="overview">概览</button>
+  <button type="button" class="tab" data-tab="instruments">器具</button>
+  <button type="button" class="tab" data-tab="records">检定记录</button>
+  <button type="button" class="tab" data-tab="standards">标准器</button>
+  <button type="button" class="tab" data-tab="due">到期清单</button>
+</nav>
+
+<main class="main">
+
+  <!-- 概览 -->
+  <section class="view is-active" data-view="overview">
+    <div class="cards" id="overviewCards"></div>
+    <p class="panel-note">以上数字与标记全部取自接口返回的字段值；点卡片可跳到对应标签并带上筛选。</p>
+  </section>
+
+  <!-- 器具 -->
+  <section class="view" data-view="instruments">
+    <div class="workspace">
+      <aside class="filters">
+        <h3 class="filters-title">筛选</h3>
+        <label class="field">
+          <span class="field-label">状态</span>
+          <select id="fInstStatus" data-field="status"></select>
+        </label>
+        <label class="field">
+          <span class="field-label">类别</span>
+          <select id="fInstCategory" data-field="category"></select>
+        </label>
+        <label class="field">
+          <span class="field-label">部门</span>
+          <select id="fInstDept" data-field="deptId"></select>
+        </label>
+        <label class="field">
+          <span class="field-label">关键词</span>
+          <input type="text" id="fInstKeyword" placeholder="编号 / 名称 / 型号 / 责任人">
+        </label>
+        <div class="filters-actions">
+          <button type="button" class="btn btn-primary" id="btnInstSearch">查询</button>
+          <button type="button" class="btn" id="btnInstReset">重置</button>
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="btnInstNew">新增器具</button>
+        <p class="hint" id="instHint"></p>
+      </aside>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">器具台账</span>
+          <span class="panel-note">表格按编号升序返回；点一行展开历史检定、覆盖标准器与连续不合格标记。</span>
+        </div>
+        <div class="table-wrap">
+          <table class="grid">
+            <thead>
+              <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>类别</th>
+                <th>量程</th>
+                <th>准确度等级</th>
+                <th>状态</th>
+                <th>到期日</th>
+                <th>剩余天数</th>
+                <th>最近结论</th>
+              </tr>
+            </thead>
+            <tbody id="instRows"></tbody>
+          </table>
+        </div>
+        <p class="empty" id="instEmpty" hidden>没有符合条件的器具</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 检定记录 -->
+  <section class="view" data-view="records">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">检定记录</span>
+        <button type="button" class="btn btn-primary" id="btnRecNew">新增检定记录</button>
+      </div>
+      <div class="filterbar">
+        <label class="field field-inline">
+          <span class="field-label">器具</span>
+          <select id="fRecInstrument" data-field="instrumentId"></select>
+        </label>
+        <label class="field field-inline">
+          <span class="field-label">结论</span>
+          <select id="fRecVerdict" data-field="verdict"></select>
+        </label>
+        <label class="field field-inline">
+          <span class="field-label">种类</span>
+          <select id="fRecKind" data-field="kind"></select>
+        </label>
+        <label class="field field-inline">
+          <span class="field-label">日期从</span>
+          <input type="date" id="fRecFrom" data-field="from">
+        </label>
+        <label class="field field-inline">
+          <span class="field-label">日期到</span>
+          <input type="date" id="fRecTo" data-field="to">
+        </label>
+        <button type="button" class="btn btn-primary" id="btnRecSearch">查询</button>
+        <button type="button" class="btn" id="btnRecReset">重置</button>
+      </div>
+      <div class="table-wrap">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>记录编号</th>
+              <th>器具</th>
+              <th>日期</th>
+              <th>种类</th>
+              <th>点数</th>
+              <th>代表误差</th>
+              <th>结论</th>
+            </tr>
+          </thead>
+          <tbody id="recRows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="recEmpty" hidden>没有符合条件的检定记录</p>
+    </div>
+  </section>
+
+  <!-- 标准器 -->
+  <section class="view" data-view="standards">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">标准器</span>
+        <button type="button" class="btn btn-primary" id="btnStdNew">新增标准器</button>
+      </div>
+      <div class="table-wrap">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>量程</th>
+              <th>等级</th>
+              <th>证书号</th>
+              <th>有效期至</th>
+              <th>状态标记</th>
+              <th>覆盖器具数</th>
+            </tr>
+          </thead>
+          <tbody id="stdRows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="stdEmpty" hidden>还没有登记标准器</p>
+    </div>
+  </section>
+
+  <!-- 到期清单 -->
+  <section class="view" data-view="due">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">到期清单</span>
+        <span class="panel-note">排序口径：按到期日从近到远（清单位次取服务端返回的顺序）。</span>
+      </div>
+      <div class="filterbar">
+        <label class="field field-inline">
+          <span class="field-label">标记</span>
+          <select id="fDueBand" data-field="band">
+            <option value="">全部</option>
+            <option value="正常">正常</option>
+            <option value="宽限内">宽限内</option>
+            <option value="已超期">已超期</option>
+            <option value="已停用">已停用</option>
+            <option value="送检中">送检中</option>
+            <option value="已报废">已报废</option>
+          </select>
+        </label>
+        <button type="button" class="btn btn-primary" id="btnDueSearch">查询</button>
+        <button type="button" class="btn" id="btnDueReset">重置</button>
+        <span class="hint hint-inline" id="dueHint"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>状态</th>
+              <th>到期日</th>
+              <th>宽限截止</th>
+              <th>剩余天数</th>
+              <th>标记</th>
+            </tr>
+          </thead>
+          <tbody id="dueRows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="dueEmpty" hidden>没有符合条件的器具</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<div class="modal-mask" id="modalMask" hidden>
+
+  <!-- 设置 -->
+  <div class="modal" data-modal="settings" hidden>
+    <div class="modal-head">
+      <h2>全局设置</h2>
+      <button type="button" class="modal-close" data-close="1">关闭</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-note">保存走 PATCH /api/settings，只提交这里列出的字段。</p>
+      <div class="form-grid">
+        <label class="field">
+          <span class="field-label">基准单位</span>
+          <input type="text" data-field="baseUnit">
+          <em class="field-error-text" data-field-error="baseUnit" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">默认检定周期（月）</span>
+          <input type="number" min="1" max="120" data-field="defaultCycleMonths">
+          <em class="field-error-text" data-field-error="defaultCycleMonths" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">宽限天数</span>
+          <input type="number" min="0" data-field="graceDays">
+          <em class="field-error-text" data-field-error="graceDays" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">分段比例（半量程分界）</span>
+          <input type="number" step="0.01" min="0" max="1" data-field="segmentRatio">
+          <em class="field-error-text" data-field-error="segmentRatio" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">温度参考（℃）</span>
+          <input type="number" step="any" data-field="tempReferenceC">
+          <em class="field-error-text" data-field-error="tempReferenceC" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">温度系数（每℃）</span>
+          <input type="number" step="any" data-field="tempCoefficientPerC">
+          <em class="field-error-text" data-field-error="tempCoefficientPerC" hidden></em>
+        </label>
+      </div>
+      <p class="form-error" data-form-error hidden></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" data-close="1">取消</button>
+      <button type="button" class="btn btn-primary" data-submit="settings">保存设置</button>
+    </div>
+  </div>
+
+  <!-- 器具 -->
+  <div class="modal modal-wide" data-modal="instrument" hidden>
+    <div class="modal-head">
+      <h2 id="instModalTitle">新增器具</h2>
+      <button type="button" class="modal-close" data-close="1">关闭</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="field">
+          <span class="field-label">器具名称</span>
+          <input type="text" data-field="name">
+          <em class="field-error-text" data-field-error="name" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">型号规格</span>
+          <input type="text" data-field="model">
+          <em class="field-error-text" data-field-error="model" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">类别</span>
+          <select data-field="category">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+          <em class="field-error-text" data-field-error="category" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">准确度等级</span>
+          <select data-field="accuracyClass">
+            <option value="0.5级">0.5级</option>
+            <option value="1级">1级</option>
+            <option value="2级">2级</option>
+          </select>
+          <em class="field-error-text" data-field-error="accuracyClass" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">量程下限</span>
+          <input type="number" step="any" data-field="rangeMin">
+          <em class="field-error-text" data-field-error="rangeMin" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">量程上限</span>
+          <input type="number" step="any" data-field="rangeMax">
+          <em class="field-error-text" data-field-error="rangeMax" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">分辨力</span>
+          <input type="number" step="any" data-field="resolution">
+          <em class="field-error-text" data-field-error="resolution" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">检定周期（月）</span>
+          <input type="number" min="1" max="120" data-field="cycleMonths">
+          <em class="field-error-text" data-field-error="cycleMonths" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">状态</span>
+          <select data-field="status">
+            <option value="在用">在用</option>
+            <option value="停用">停用</option>
+            <option value="送检中">送检中</option>
+            <option value="报废">报废</option>
+          </select>
+          <em class="field-error-text" data-field-error="status" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">所在部门</span>
+          <select data-field="deptId"></select>
+          <em class="field-error-text" data-field-error="deptId" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">责任人</span>
+          <input type="text" data-field="owner">
+          <em class="field-error-text" data-field-error="owner" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">上次检定日期</span>
+          <input type="date" data-field="lastCalibratedOn">
+          <em class="field-error-text" data-field-error="lastCalibratedOn" hidden></em>
+        </label>
+        <label class="field field-check">
+          <input type="checkbox" data-field="mandatory">
+          <span class="field-label">强制检定</span>
+        </label>
+        <label class="field field-full">
+          <span class="field-label">备注</span>
+          <textarea rows="2" data-field="remark"></textarea>
+          <em class="field-error-text" data-field-error="remark" hidden></em>
+        </label>
+      </div>
+      <p class="form-error" data-form-error hidden></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" data-close="1">取消</button>
+      <button type="button" class="btn btn-primary" data-submit="instrument">保存器具</button>
+    </div>
+  </div>
+
+  <!-- 检定记录 -->
+  <div class="modal modal-wide" data-modal="record" hidden>
+    <div class="modal-head">
+      <h2>新增检定记录</h2>
+      <button type="button" class="modal-close" data-close="1">关闭</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="field">
+          <span class="field-label">器具</span>
+          <select data-field="instrumentId"></select>
+          <em class="field-error-text" data-field-error="instrumentId" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">种类</span>
+          <select data-field="kind">
+            <option value="检定">检定</option>
+            <option value="校准">校准</option>
+            <option value="期间核查">期间核查</option>
+          </select>
+          <em class="field-error-text" data-field-error="kind" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">检定日期</span>
+          <input type="date" data-field="date">
+          <em class="field-error-text" data-field-error="date" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">检定机构</span>
+          <input type="text" data-field="org">
+          <em class="field-error-text" data-field-error="org" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">证书号</span>
+          <input type="text" data-field="certNo">
+          <em class="field-error-text" data-field-error="certNo" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">温度（℃）</span>
+          <input type="number" step="any" data-field="tempC">
+          <em class="field-error-text" data-field-error="tempC" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">湿度（%RH）</span>
+          <input type="number" step="any" data-field="rh">
+          <em class="field-error-text" data-field-error="rh" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">检定员</span>
+          <input type="text" data-field="operator">
+          <em class="field-error-text" data-field-error="operator" hidden></em>
+        </label>
+        <label class="field field-full">
+          <span class="field-label">备注</span>
+          <textarea rows="2" data-field="remark"></textarea>
+          <em class="field-error-text" data-field-error="remark" hidden></em>
+        </label>
+      </div>
+
+      <div class="points" data-field="points">
+        <div class="points-head">
+          <span class="points-title">检定点</span>
+          <span class="points-hint" id="recUnitHint"></span>
+          <button type="button" class="btn btn-sm" id="btnAddPoint">加一个点</button>
+        </div>
+        <div id="pointRows"></div>
+        <em class="field-error-text" data-field-error="points" hidden></em>
+      </div>
+
+      <p class="form-error" data-form-error hidden></p>
+      <div class="record-result" id="recordResult" hidden></div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" data-close="1">关闭</button>
+      <button type="button" class="btn btn-primary" data-submit="record">保存记录</button>
+    </div>
+  </div>
+
+  <!-- 标准器 -->
+  <div class="modal modal-wide" data-modal="standard" hidden>
+    <div class="modal-head">
+      <h2 id="stdModalTitle">新增标准器</h2>
+      <button type="button" class="modal-close" data-close="1">关闭</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="field">
+          <span class="field-label">标准器名称</span>
+          <input type="text" data-field="name">
+          <em class="field-error-text" data-field-error="name" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">准确度等级</span>
+          <select data-field="accuracyClass">
+            <option value="0.5级">0.5级</option>
+            <option value="1级">1级</option>
+            <option value="2级">2级</option>
+          </select>
+          <em class="field-error-text" data-field-error="accuracyClass" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">量程下限</span>
+          <input type="number" step="any" data-field="rangeMin">
+          <em class="field-error-text" data-field-error="rangeMin" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">量程上限</span>
+          <input type="number" step="any" data-field="rangeMax">
+          <em class="field-error-text" data-field-error="rangeMax" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">证书号</span>
+          <input type="text" data-field="certNo">
+          <em class="field-error-text" data-field-error="certNo" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">有效期至</span>
+          <input type="date" data-field="validUntil">
+          <em class="field-error-text" data-field-error="validUntil" hidden></em>
+        </label>
+        <label class="field">
+          <span class="field-label">溯源机构</span>
+          <input type="text" data-field="org">
+          <em class="field-error-text" data-field-error="org" hidden></em>
+        </label>
+        <label class="field field-full">
+          <span class="field-label">覆盖器具（可多选）</span>
+          <select multiple size="6" data-field="coversInstrumentIds"></select>
+          <em class="field-error-text" data-field-error="coversInstrumentIds" hidden></em>
+        </label>
+        <label class="field field-full">
+          <span class="field-label">备注</span>
+          <textarea rows="2" data-field="remark"></textarea>
+          <em class="field-error-text" data-field-error="remark" hidden></em>
+        </label>
+      </div>
+      <p class="form-error" data-form-error hidden></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" data-close="1">取消</button>
+      <button type="button" class="btn btn-primary" data-submit="standard">保存标准器</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

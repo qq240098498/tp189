@@ -1,0 +1,950 @@
+{
+  "settings": {
+    "baseUnit": "mm",
+    "defaultCycleMonths": 12,
+    "graceDays": 15,
+    "segmentRatio": 0.5,
+    "tempReferenceC": 20,
+    "tempCoefficientPerC": 0.002
+  },
+  "departments": [
+    {
+      "id": "dept-0001",
+      "code": "D1",
+      "name": "长度计量室",
+      "manager": "王主任"
+    },
+    {
+      "id": "dept-0002",
+      "code": "D2",
+      "name": "量具检定室",
+      "manager": "张主任"
+    },
+    {
+      "id": "dept-0003",
+      "code": "D3",
+      "name": "精密测量室",
+      "manager": "赵主任"
+    },
+    {
+      "id": "dept-0004",
+      "code": "D4",
+      "name": "工具管理室",
+      "manager": "刘主任"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "inst-0001",
+      "code": "JL-0001",
+      "name": "数显外径千分尺",
+      "model": "0-25mm/0.001mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 25,
+      "resolution": 0.001,
+      "accuracyClass": "1级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "在用",
+      "deptId": "dept-0001",
+      "owner": "王工",
+      "lastCalibratedOn": "2026-06-18",
+      "remark": ""
+    },
+    {
+      "id": "inst-0002",
+      "code": "JL-0002",
+      "name": "游标卡尺",
+      "model": "0-150mm/0.02mm",
+      "category": "B",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 150,
+      "resolution": 0.02,
+      "accuracyClass": "2级",
+      "cycleMonths": 12,
+      "mandatory": false,
+      "status": "在用",
+      "deptId": "dept-0001",
+      "owner": "李工",
+      "lastCalibratedOn": "2026-08-14",
+      "remark": ""
+    },
+    {
+      "id": "inst-0003",
+      "code": "JL-0003",
+      "name": "数显深度尺",
+      "model": "0-200mm/0.01mm",
+      "category": "B",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 200,
+      "resolution": 0.01,
+      "accuracyClass": "2级",
+      "cycleMonths": 12,
+      "mandatory": false,
+      "status": "在用",
+      "deptId": "dept-0002",
+      "owner": "张工",
+      "lastCalibratedOn": "2026-05-20",
+      "remark": ""
+    },
+    {
+      "id": "inst-0004",
+      "code": "JL-0004",
+      "name": "内径千分尺",
+      "model": "0-50mm/0.005mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 50,
+      "resolution": 0.005,
+      "accuracyClass": "1级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "在用",
+      "deptId": "dept-0001",
+      "owner": "王工",
+      "lastCalibratedOn": "2025-09-28",
+      "remark": ""
+    },
+    {
+      "id": "inst-0005",
+      "code": "JL-0005",
+      "name": "杠杆千分表",
+      "model": "0-1mm/0.001mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 1,
+      "resolution": 0.001,
+      "accuracyClass": "1级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "在用",
+      "deptId": "dept-0003",
+      "owner": "赵工",
+      "lastCalibratedOn": "2025-09-30",
+      "remark": ""
+    },
+    {
+      "id": "inst-0006",
+      "code": "JL-0006",
+      "name": "高度游标卡尺",
+      "model": "0-300mm/0.02mm",
+      "category": "B",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 300,
+      "resolution": 0.02,
+      "accuracyClass": "2级",
+      "cycleMonths": 12,
+      "mandatory": false,
+      "status": "在用",
+      "deptId": "dept-0002",
+      "owner": "张工",
+      "lastCalibratedOn": "2025-03-15",
+      "remark": ""
+    },
+    {
+      "id": "inst-0007",
+      "code": "JL-0007",
+      "name": "外径千分尺",
+      "model": "0-25mm/0.01mm",
+      "category": "C",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 25,
+      "resolution": 0.01,
+      "accuracyClass": "2级",
+      "cycleMonths": 36,
+      "mandatory": false,
+      "status": "在用",
+      "deptId": "dept-0002",
+      "owner": "陈工",
+      "lastCalibratedOn": "2024-12-10",
+      "remark": ""
+    },
+    {
+      "id": "inst-0008",
+      "code": "JL-0008",
+      "name": "塞尺",
+      "model": "0-1mm/0.01mm",
+      "category": "C",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 1,
+      "resolution": 0.01,
+      "accuracyClass": "2级",
+      "cycleMonths": 36,
+      "mandatory": false,
+      "status": "在用",
+      "deptId": "dept-0004",
+      "owner": "刘工",
+      "lastCalibratedOn": "2024-11-05",
+      "remark": ""
+    },
+    {
+      "id": "inst-0009",
+      "code": "JL-0009",
+      "name": "三坐标测量机",
+      "model": "0-500mm/0.0005mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 500,
+      "resolution": 0.0005,
+      "accuracyClass": "0.5级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "在用",
+      "deptId": "dept-0003",
+      "owner": "赵工",
+      "lastCalibratedOn": "2025-10-08",
+      "remark": ""
+    },
+    {
+      "id": "inst-0010",
+      "code": "JL-0010",
+      "name": "数显千分尺",
+      "model": "0-25mm/0.001mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 25,
+      "resolution": 0.001,
+      "accuracyClass": "1级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "送检中",
+      "deptId": "dept-0001",
+      "owner": "王工",
+      "lastCalibratedOn": "2025-09-25",
+      "remark": "2026-09-10 送往省计量院，等待取回"
+    },
+    {
+      "id": "inst-0011",
+      "code": "JL-0011",
+      "name": "游标卡尺",
+      "model": "0-150mm/0.02mm",
+      "category": "B",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 150,
+      "resolution": 0.02,
+      "accuracyClass": "2级",
+      "cycleMonths": 12,
+      "mandatory": false,
+      "status": "停用",
+      "deptId": "dept-0004",
+      "owner": "刘工",
+      "lastCalibratedOn": "2024-09-12",
+      "remark": "2026-07-02 因尺身弯曲停用"
+    },
+    {
+      "id": "inst-0012",
+      "code": "JL-0012",
+      "name": "深度千分尺",
+      "model": "0-100mm/0.01mm",
+      "category": "B",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 100,
+      "resolution": 0.01,
+      "accuracyClass": "2级",
+      "cycleMonths": 12,
+      "mandatory": false,
+      "status": "送检中",
+      "deptId": "dept-0002",
+      "owner": "陈工",
+      "lastCalibratedOn": "2024-09-20",
+      "remark": "2026-08-28 送市计量所"
+    },
+    {
+      "id": "inst-0013",
+      "code": "JL-0013",
+      "name": "外径千分尺",
+      "model": "0-25mm/0.01mm",
+      "category": "C",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 25,
+      "resolution": 0.01,
+      "accuracyClass": "2级",
+      "cycleMonths": 36,
+      "mandatory": false,
+      "status": "报废",
+      "deptId": "dept-0002",
+      "owner": "陈工",
+      "lastCalibratedOn": "2026-05-08",
+      "remark": "2026-04-02 检定不合格后报废"
+    },
+    {
+      "id": "inst-0014",
+      "code": "JL-0014",
+      "name": "测长机",
+      "model": "0-1000mm/0.001mm",
+      "category": "A",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 1000,
+      "resolution": 0.001,
+      "accuracyClass": "0.5级",
+      "cycleMonths": 12,
+      "mandatory": true,
+      "status": "在用",
+      "deptId": "dept-0003",
+      "owner": "孙工",
+      "lastCalibratedOn": "2025-12-05",
+      "remark": ""
+    }
+  ],
+  "records": [
+    {
+      "id": "cal-0001",
+      "code": "JD2025-001",
+      "instrumentId": "inst-0001",
+      "kind": "检定",
+      "date": "2025-11-20",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2025-0912",
+      "tempC": 20.4,
+      "rh": 52,
+      "points": [
+        {
+          "standard": 5,
+          "indicated": 5.002
+        },
+        {
+          "standard": 12.5,
+          "indicated": 12.505
+        },
+        {
+          "standard": 25,
+          "indicated": 25.012
+        }
+      ],
+      "verdict": "合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0002",
+      "code": "JD2026-001",
+      "instrumentId": "inst-0001",
+      "kind": "检定",
+      "date": "2026-03-12",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2026-0418",
+      "tempC": 20.1,
+      "rh": 55,
+      "points": [
+        {
+          "standard": 12.5,
+          "indicated": 12.7
+        },
+        {
+          "standard": 5,
+          "indicated": 5
+        },
+        {
+          "standard": 25,
+          "indicated": 25.01
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "周工",
+      "remark": "半量程那点争议，业务说按说明该给整程允差"
+    },
+    {
+      "id": "cal-0003",
+      "code": "JD2026-002",
+      "instrumentId": "inst-0001",
+      "kind": "检定",
+      "date": "2026-06-18",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2026-0977",
+      "tempC": 20.2,
+      "rh": 50,
+      "points": [
+        {
+          "standard": 2,
+          "indicated": 2.002
+        },
+        {
+          "standard": 5,
+          "indicated": 5
+        },
+        {
+          "standard": 25,
+          "indicated": 25.4
+        }
+      ],
+      "verdict": "合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0004",
+      "code": "JD2024-001",
+      "instrumentId": "inst-0002",
+      "kind": "检定",
+      "date": "2024-10-18",
+      "org": "市计量测试所",
+      "certNo": "JD-2024-1203",
+      "tempC": 20.6,
+      "rh": 58,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 50.4
+        },
+        {
+          "standard": 100,
+          "indicated": 100.2
+        },
+        {
+          "standard": 150,
+          "indicated": 150.1
+        }
+      ],
+      "verdict": "合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0005",
+      "code": "JD2025-002",
+      "instrumentId": "inst-0002",
+      "kind": "检定",
+      "date": "2025-10-20",
+      "org": "市计量测试所",
+      "certNo": "JD-2025-1330",
+      "tempC": 21,
+      "rh": 60,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 51.8
+        },
+        {
+          "standard": 75,
+          "indicated": 77.2
+        },
+        {
+          "standard": 150,
+          "indicated": 152.4
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "吴工",
+      "remark": "低段两个点都超差"
+    },
+    {
+      "id": "cal-0006",
+      "code": "JD2026-003",
+      "instrumentId": "inst-0002",
+      "kind": "检定",
+      "date": "2026-08-14",
+      "org": "市计量测试所",
+      "certNo": "JD-2026-1421",
+      "tempC": 20.8,
+      "rh": 57,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 51.7
+        },
+        {
+          "standard": 75,
+          "indicated": 77
+        },
+        {
+          "standard": 150,
+          "indicated": 150
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "吴工",
+      "remark": "连续第二次不合格"
+    },
+    {
+      "id": "cal-0007",
+      "code": "JD2024-002",
+      "instrumentId": "inst-0003",
+      "kind": "检定",
+      "date": "2024-08-05",
+      "org": "市计量测试所",
+      "certNo": "JD-2024-0871",
+      "tempC": 20.3,
+      "rh": 54,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 50.5
+        },
+        {
+          "standard": 100,
+          "indicated": 100.8
+        },
+        {
+          "standard": 200,
+          "indicated": 200.5
+        }
+      ],
+      "verdict": "合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0008",
+      "code": "JD2026-004",
+      "instrumentId": "inst-0003",
+      "kind": "检定",
+      "date": "2026-05-20",
+      "org": "市计量测试所",
+      "certNo": "JD-2026-0644",
+      "tempC": 20.5,
+      "rh": 53,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 52.4
+        },
+        {
+          "standard": 100,
+          "indicated": 103.5
+        },
+        {
+          "standard": 200,
+          "indicated": 200.8
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0009",
+      "code": "JD2025-003",
+      "instrumentId": "inst-0004",
+      "kind": "检定",
+      "date": "2025-09-28",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2025-1044",
+      "tempC": 20.2,
+      "rh": 51,
+      "points": [
+        {
+          "standard": 10,
+          "indicated": 10.02
+        },
+        {
+          "standard": 25,
+          "indicated": 25.05
+        },
+        {
+          "standard": 50,
+          "indicated": 50.03
+        }
+      ],
+      "verdict": "合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0010",
+      "code": "JD2024-003",
+      "instrumentId": "inst-0005",
+      "kind": "检定",
+      "date": "2024-09-30",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2024-1105",
+      "tempC": 20,
+      "rh": 49,
+      "points": [
+        {
+          "standard": 0.2,
+          "indicated": 0.202
+        },
+        {
+          "standard": 0.5,
+          "indicated": 0.503
+        },
+        {
+          "standard": 1,
+          "indicated": 1.006
+        }
+      ],
+      "verdict": "合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0011",
+      "code": "JD2025-004",
+      "instrumentId": "inst-0005",
+      "kind": "检定",
+      "date": "2025-09-30",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2025-1108",
+      "tempC": 20.1,
+      "rh": 48,
+      "points": [
+        {
+          "standard": 0.2,
+          "indicated": 0.208
+        },
+        {
+          "standard": 0.5,
+          "indicated": 0.504
+        },
+        {
+          "standard": 1,
+          "indicated": 1.005
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0012",
+      "code": "JD2025-005",
+      "instrumentId": "inst-0006",
+      "kind": "检定",
+      "date": "2025-03-15",
+      "org": "市计量测试所",
+      "certNo": "JD-2025-0355",
+      "tempC": 20.7,
+      "rh": 56,
+      "points": [
+        {
+          "standard": 100,
+          "indicated": 100.3
+        },
+        {
+          "standard": 150,
+          "indicated": 150.6
+        },
+        {
+          "standard": 300,
+          "indicated": 300.4
+        }
+      ],
+      "verdict": "合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0013",
+      "code": "JD2024-004",
+      "instrumentId": "inst-0007",
+      "kind": "检定",
+      "date": "2024-12-10",
+      "org": "县计量所",
+      "certNo": "JD-2024-1377",
+      "tempC": 20.4,
+      "rh": 52,
+      "points": [
+        {
+          "standard": 5,
+          "indicated": 5.06
+        },
+        {
+          "standard": 12.5,
+          "indicated": 12.35
+        },
+        {
+          "standard": 25,
+          "indicated": 25.08
+        }
+      ],
+      "verdict": "合格",
+      "operator": "郝工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0014",
+      "code": "JD2024-005",
+      "instrumentId": "inst-0008",
+      "kind": "检定",
+      "date": "2024-11-05",
+      "org": "县计量所",
+      "certNo": "JD-2024-1290",
+      "tempC": 20.6,
+      "rh": 55,
+      "points": [
+        {
+          "standard": 0.2,
+          "indicated": 0.205
+        },
+        {
+          "standard": 0.5,
+          "indicated": 0.508
+        },
+        {
+          "standard": 1,
+          "indicated": 1.004
+        }
+      ],
+      "verdict": "合格",
+      "operator": "郝工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0015",
+      "code": "JD2024-006",
+      "instrumentId": "inst-0009",
+      "kind": "检定",
+      "date": "2024-10-08",
+      "org": "国家计量院",
+      "certNo": "JD-2024-1188",
+      "tempC": 20,
+      "rh": 45,
+      "points": [
+        {
+          "standard": 100,
+          "indicated": 100.5
+        },
+        {
+          "standard": 250,
+          "indicated": 250.9
+        },
+        {
+          "standard": 500,
+          "indicated": 500.4
+        }
+      ],
+      "verdict": "合格",
+      "operator": "钱工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0016",
+      "code": "JD2025-006",
+      "instrumentId": "inst-0009",
+      "kind": "检定",
+      "date": "2025-10-08",
+      "org": "国家计量院",
+      "certNo": "JD-2025-1150",
+      "tempC": 20,
+      "rh": 46,
+      "points": [
+        {
+          "standard": 100,
+          "indicated": 101.6
+        },
+        {
+          "standard": 250,
+          "indicated": 252.2
+        },
+        {
+          "standard": 500,
+          "indicated": 500.6
+        }
+      ],
+      "verdict": "不合格",
+      "operator": "钱工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0017",
+      "code": "JD2025-007",
+      "instrumentId": "inst-0010",
+      "kind": "检定",
+      "date": "2025-09-25",
+      "org": "省计量科学研究院",
+      "certNo": "JD-2025-1088",
+      "tempC": 20.3,
+      "rh": 50,
+      "points": [
+        {
+          "standard": 5,
+          "indicated": 5.003
+        },
+        {
+          "standard": 12.5,
+          "indicated": 12.504
+        },
+        {
+          "standard": 25,
+          "indicated": 25.008
+        }
+      ],
+      "verdict": "合格",
+      "operator": "周工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0018",
+      "code": "JD2024-007",
+      "instrumentId": "inst-0011",
+      "kind": "检定",
+      "date": "2024-09-12",
+      "org": "市计量测试所",
+      "certNo": "JD-2024-1041",
+      "tempC": 20.9,
+      "rh": 59,
+      "points": [
+        {
+          "standard": 50,
+          "indicated": 50.6
+        },
+        {
+          "standard": 100,
+          "indicated": 100.4
+        },
+        {
+          "standard": 150,
+          "indicated": 150.2
+        }
+      ],
+      "verdict": "合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0019",
+      "code": "JD2024-008",
+      "instrumentId": "inst-0012",
+      "kind": "检定",
+      "date": "2024-09-20",
+      "org": "市计量测试所",
+      "certNo": "JD-2024-1077",
+      "tempC": 20.5,
+      "rh": 57,
+      "points": [
+        {
+          "standard": 20,
+          "indicated": 20.06
+        },
+        {
+          "standard": 50,
+          "indicated": 50.11
+        },
+        {
+          "standard": 100,
+          "indicated": 100.09
+        }
+      ],
+      "verdict": "合格",
+      "operator": "吴工",
+      "remark": ""
+    },
+    {
+      "id": "cal-0020",
+      "code": "JD2026-005",
+      "instrumentId": "inst-0013",
+      "kind": "检定",
+      "date": "2026-05-08",
+      "org": "县计量所",
+      "certNo": "JD-2026-0602",
+      "tempC": 20.4,
+      "rh": 54,
+      "points": [
+        {
+          "standard": 5,
+          "indicated": 5.06
+        },
+        {
+          "standard": 12.5,
+          "indicated": 12.62
+        },
+        {
+          "standard": 25,
+          "indicated": 25.2
+        }
+      ],
+      "verdict": "合格",
+      "operator": "郝工",
+      "remark": "该器具 2026-04-02 已报废，这条记录是报废之后录进来的"
+    },
+    {
+      "id": "cal-0021",
+      "code": "JD2025-008",
+      "instrumentId": "inst-0014",
+      "kind": "检定",
+      "date": "2025-12-05",
+      "org": "国家计量院",
+      "certNo": "JD-2025-1420",
+      "tempC": 20,
+      "rh": 47,
+      "points": [
+        {
+          "standard": 200,
+          "indicated": 200.8
+        },
+        {
+          "standard": 500,
+          "indicated": 501.2
+        },
+        {
+          "standard": 1000,
+          "indicated": 1000.9
+        }
+      ],
+      "verdict": "合格",
+      "operator": "钱工",
+      "remark": ""
+    }
+  ],
+  "standards": [
+    {
+      "id": "std-0001",
+      "code": "BZ-0001",
+      "name": "三等量块组",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 100,
+      "accuracyClass": "0.5级",
+      "certNo": "LG-2025-0781",
+      "validUntil": "2027-03-31",
+      "org": "省计量科学研究院",
+      "coversInstrumentIds": [
+        "inst-0001",
+        "inst-0004",
+        "inst-0007",
+        "inst-0013"
+      ],
+      "remark": ""
+    },
+    {
+      "id": "std-0002",
+      "code": "BZ-0002",
+      "name": "标准环规",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 50,
+      "accuracyClass": "1级",
+      "certNo": "HG-2025-0455",
+      "validUntil": "2026-10-31",
+      "org": "市计量测试所",
+      "coversInstrumentIds": [
+        "inst-0004"
+      ],
+      "remark": ""
+    },
+    {
+      "id": "std-0003",
+      "code": "BZ-0003",
+      "name": "激光干涉仪",
+      "unit": "mm",
+      "rangeMin": 0,
+      "rangeMax": 1000,
+      "accuracyClass": "0.5级",
+      "certNo": "JG-2024-1902",
+      "validUntil": "2026-09-30",
+      "org": "国家计量院",
+      "coversInstrumentIds": [
+        "inst-0009",
+        "inst-0014"
+      ],
+      "remark": ""
+    }
+  ],
+  "checks": [],
+  "usages": []
+}
